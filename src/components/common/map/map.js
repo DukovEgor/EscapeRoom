@@ -5,7 +5,6 @@ import { ANCHOR_SIZES, CITY as city, ICONS_SIZES } from 'utils/const';
 import useMap from 'hooks/useMap';
 
 function Map() {
-
   const mapRef = useRef(null);
   const map = useMap({ mapRef, city });
 
@@ -16,9 +15,11 @@ function Map() {
   });
 
   useEffect(() => {
-
     if (map) {
-      map.flyTo([city.location.latitude, city.location.longitude], city.location.zoom);
+      map.flyTo(
+        [city.location.latitude, city.location.longitude],
+        city.location.zoom,
+      );
 
       const marker = leaflet.marker(
         {
@@ -27,19 +28,14 @@ function Map() {
         },
         {
           icon: defaultCustomIcon,
-        });
+        },
+      );
 
       marker.addTo(map);
-
     }
   }, [defaultCustomIcon, map]);
 
-  return (
-    <section
-      style={{ width: '100%' }}
-      ref={mapRef}
-    />
-  );
+  return <section style={{ width: '100%' }} ref={mapRef} />;
 }
 
 export default Map;
