@@ -17,7 +17,7 @@ export const CITY = {
   location: {
     latitude: 59.968137,
     longitude: 30.316272,
-    zoom: 16,
+    zoom: 17,
   },
 };
 
@@ -31,9 +31,19 @@ export const levelVocabulary = {
 };
 
 export const typeVocabulary = {
-  horror: 'ужасы',
-  mystic: 'мистика',
-  detective: 'детектив',
-  adventures: 'приключения',
+  all: 'Все квесты',
+  horror: 'Ужасы',
+  mystic: 'Мистика',
+  detective: 'Детектив',
+  adventures: 'Приключения',
   'sci-fi': 'sci-fi',
 };
+
+export const MENU_TABS = [
+  'Все квесты',
+  'Ужасы',
+  'Мистика',
+  'Детектив',
+  'Приключения',
+  'Sci-fi',
+];

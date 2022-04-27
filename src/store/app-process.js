@@ -3,6 +3,7 @@ import { NameSpace } from 'utils/const';
 
 const initialState = {
   activeLink: 'quests',
+  activeTab: 'all',
 };
 
 export const appProcess = createSlice({
@@ -12,7 +13,10 @@ export const appProcess = createSlice({
     changeLink: (state, action) => {
       state.activeLink = action.payload;
     },
+    changeTab: (state, action) => {
+      state.activeTab = action.payload;
+    },
   },
 });
 
-export const { changeLink } = appProcess.actions;
+export const { changeLink, changeTab } = appProcess.actions;

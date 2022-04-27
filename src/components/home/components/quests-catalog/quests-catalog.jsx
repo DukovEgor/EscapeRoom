@@ -7,60 +7,48 @@ import { ReactComponent as IconScifi } from 'assets/img/icon-scifi.svg';
 import { ReactComponent as IconPerson } from 'assets/img/icon-person.svg';
 import { ReactComponent as IconPuzzle } from 'assets/img/icon-puzzle.svg';
 import * as S from './quests-catalog.styled';
-import { useAppSelector } from 'hooks';
-import { levelVocabulary } from 'utils/const';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { levelVocabulary, typeVocabulary } from 'utils/const';
+import { changeTab } from 'store/app-process';
+import { getFilteredOffers } from 'utils/utils';
+
+const ICONS = [
+  <IconAllQuests />,
+  <IconAdventures />,
+  <IconHorrors />,
+  <IconMystic />,
+  <IconDetective />,
+  <IconScifi />,
+];
+
+const tabsArray = Object.entries(typeVocabulary);
 
 const QuestsCatalog = () => {
   const { offers } = useAppSelector(({ DATA }) => DATA);
 
+  const { activeTab } = useAppSelector(({ PROCESS }) => PROCESS);
+
+  const dispatch = useAppDispatch();
+
+  const filteredOffers = getFilteredOffers(offers.slice(), activeTab);
   return (
     <>
       <S.Tabs>
-        <S.TabItem>
-          <S.TabBtn isActive>
-            <IconAllQuests />
-            <S.TabTitle>Все квесты</S.TabTitle>
-          </S.TabBtn>
-        </S.TabItem>
-
-        <S.TabItem>
-          <S.TabBtn>
-            <IconAdventures />
-            <S.TabTitle>Приключения</S.TabTitle>
-          </S.TabBtn>
-        </S.TabItem>
-
-        <S.TabItem>
-          <S.TabBtn>
-            <IconHorrors />
-            <S.TabTitle>Ужасы</S.TabTitle>
-          </S.TabBtn>
-        </S.TabItem>
-
-        <S.TabItem>
-          <S.TabBtn>
-            <IconMystic />
-            <S.TabTitle>Мистика</S.TabTitle>
-          </S.TabBtn>
-        </S.TabItem>
-
-        <S.TabItem>
-          <S.TabBtn>
-            <IconDetective />
-            <S.TabTitle>Детектив</S.TabTitle>
-          </S.TabBtn>
-        </S.TabItem>
-
-        <S.TabItem>
-          <S.TabBtn>
-            <IconScifi />
-            <S.TabTitle>Sci-fi</S.TabTitle>
-          </S.TabBtn>
-        </S.TabItem>
+        {tabsArray.map(([key, value], idx) => (
+          <S.TabItem key={key}>
+            <S.TabBtn
+              isActive={activeTab === key}
+              onClick={() => dispatch(changeTab(key))}
+            >
+              {ICONS[idx]}
+              <S.TabTitle>{value}</S.TabTitle>
+            </S.TabBtn>
+          </S.TabItem>
+        ))}
       </S.Tabs>
 
       <S.QuestsList>
-        {offers.map((offer) => {
+        {filteredOffers.map((offer) => {
           const { id, title, previewImg, level, peopleCount } = offer;
           return (
             <S.QuestItem key={id}>
