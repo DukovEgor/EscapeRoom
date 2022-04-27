@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { errorHandle } from 'services/error-handle';
 import { api } from 'store';
 import { store } from 'store';
@@ -23,6 +24,21 @@ export const fetchOfferAction = createAsyncThunk(
     try {
       const { data } = await api.get(`${APIRoute.Offers}/${id}`);
       store.dispatch(loadOffer(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchOrderAction = createAsyncThunk(
+  'data/fetchOrder',
+  async ({ peopleCount, ...data }) => {
+    try {
+      await api.post(APIRoute.Orders, {
+        ...data,
+        peopleCount: Number(peopleCount),
+      });
+      toast.success('Ваша заявка успешно отправлена!');
     } catch (error) {
       errorHandle(error);
     }

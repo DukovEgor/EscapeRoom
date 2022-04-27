@@ -62,7 +62,6 @@ const QuestsCatalog = () => {
       <S.QuestsList>
         {offers.map((offer) => {
           const { id, title, previewImg, level, peopleCount } = offer;
-          const [min, max] = peopleCount;
           return (
             <S.QuestItem key={id}>
               <S.QuestItemLink to={`/quest/${id}`}>
@@ -80,7 +79,7 @@ const QuestsCatalog = () => {
                     <S.QuestFeatures>
                       <S.QuestFeatureItem>
                         <IconPerson />
-                        {min}-{max} чел
+                        {peopleCount.join('-')} чел
                       </S.QuestFeatureItem>
                       <S.QuestFeatureItem>
                         <IconPuzzle />

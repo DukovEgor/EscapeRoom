@@ -29,3 +29,11 @@ export const levelVocabulary = {
   medium: 'средний',
   hard: 'сложный',
 };
+
+export const typeVocabulary = {
+  horror: 'ужасы',
+  mystic: 'мистика',
+  detective: 'детектив',
+  adventures: 'приключения',
+  'sci-fi': 'sci-fi',
+};

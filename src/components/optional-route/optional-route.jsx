@@ -1,5 +1,5 @@
 import { useAppSelector } from 'hooks';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 export default function OptionalRoute({ children }) {
   const { id } = useParams();

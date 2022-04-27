@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MainLayout } from 'components/common/common';
 import { ReactComponent as IconClock } from 'assets/img/icon-clock.svg';
 import { ReactComponent as IconPerson } from 'assets/img/icon-person.svg';
@@ -8,59 +8,62 @@ import { BookingModal } from './components/components';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useParams } from 'react-router-dom';
 import { fetchOfferAction } from 'store/api-actions';
+import { levelVocabulary, typeVocabulary } from 'utils/const';
 
 const DetailedQuest = () => {
   const { id } = useParams();
+
   const dispatch = useAppDispatch();
-  dispatch(fetchOfferAction(id));
+
+  useEffect(() => {
+    dispatch(fetchOfferAction(id));
+  }, [dispatch, id]);
+
   const { offer } = useAppSelector(({ DATA }) => DATA);
-  const { title, previewImg, level, peopleCount } = offer;
-  console.log(offer);
+
+  const { title, coverImg, level, peopleCount, type, duration, description } =
+    offer;
+
   const [isBookingModalOpened, setIsBookingModalOpened] = useState(false);
 
   const onBookingBtnClick = () => {
-    setIsBookingModalOpened(true);
+    setIsBookingModalOpened((prevState) => !prevState);
   };
 
   return (
     <MainLayout>
       <S.Main>
         <S.PageImage
-          src="img/cover-maniac.jpg"
-          alt="Квест Маньяк"
+          src={coverImg}
+          alt={`Квест ${title}`}
           width="1366"
           height="768"
         />
         <S.PageContentWrapper>
           <S.PageHeading>
-            <S.PageTitle>Маньяк</S.PageTitle>
-            <S.PageSubtitle>приключения</S.PageSubtitle>
+            <S.PageTitle>{title}</S.PageTitle>
+            <S.PageSubtitle>{typeVocabulary[type]}</S.PageSubtitle>
           </S.PageHeading>
 
           <S.PageDescription>
             <S.Features>
               <S.FeaturesItem>
                 <IconClock width="20" height="20" />
-                <S.FeatureTitle>90 мин</S.FeatureTitle>
+                <S.FeatureTitle>{duration} мин</S.FeatureTitle>
               </S.FeaturesItem>
               <S.FeaturesItem>
                 <IconPerson width="19" height="24" />
-                <S.FeatureTitle>3–6 чел</S.FeatureTitle>
+                <S.FeatureTitle>
+                  {peopleCount && peopleCount.join('-')} чел
+                </S.FeatureTitle>
               </S.FeaturesItem>
               <S.FeaturesItem>
                 <IconPuzzle width="24" height="24" />
-                <S.FeatureTitle>средний</S.FeatureTitle>
+                <S.FeatureTitle>{levelVocabulary[level]}</S.FeatureTitle>
               </S.FeaturesItem>
             </S.Features>
 
-            <S.QuestDescription>
-              В комнате с приглушённым светом несколько человек, незнакомых друг
-              с другом, приходят в себя. Никто не помнит, что произошло прошлым
-              вечером. Руки и ноги связаным, но одному из вас получилось
-              освободиться. На стене висит пугающий таймер и запущен отстёт
-              60&nbsp;минут. Сможете ли вы разобраться в стрессовой ситуации,
-              помочь другим, разобраться что произошло и выбраться из комнаты?
-            </S.QuestDescription>
+            <S.QuestDescription>{description}</S.QuestDescription>
 
             <S.QuestBookingBtn onClick={onBookingBtnClick}>
               Забронировать
@@ -68,7 +71,9 @@ const DetailedQuest = () => {
           </S.PageDescription>
         </S.PageContentWrapper>
 
-        {isBookingModalOpened && <BookingModal />}
+        {isBookingModalOpened && (
+          <BookingModal onButtonClose={onBookingBtnClick} />
+        )}
       </S.Main>
     </MainLayout>
   );
