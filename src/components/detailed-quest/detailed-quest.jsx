@@ -5,8 +5,17 @@ import { ReactComponent as IconPerson } from 'assets/img/icon-person.svg';
 import { ReactComponent as IconPuzzle } from 'assets/img/icon-puzzle.svg';
 import * as S from './detailed-quest.styled';
 import { BookingModal } from './components/components';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { useParams } from 'react-router-dom';
+import { fetchOfferAction } from 'store/api-actions';
 
 const DetailedQuest = () => {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  dispatch(fetchOfferAction(id));
+  const { offer } = useAppSelector(({ DATA }) => DATA);
+  const { title, previewImg, level, peopleCount } = offer;
+  console.log(offer);
   const [isBookingModalOpened, setIsBookingModalOpened] = useState(false);
 
   const onBookingBtnClick = () => {

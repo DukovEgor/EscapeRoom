@@ -3,6 +3,11 @@ export const HTTP_CODE = {
   NOT_FOUND: 404,
 };
 
+export const APIRoute = {
+  Offers: '/quests',
+  Orders: '/orders',
+};
+
 export const NameSpace = {
   data: 'DATA',
   process: 'PROCESS',
@@ -18,3 +23,9 @@ export const CITY = {
 
 export const ICONS_SIZES = [40, 40];
 export const ANCHOR_SIZES = [30, 40];
+
+export const levelVocabulary = {
+  easy: 'легкий',
+  medium: 'средний',
+  hard: 'сложный',
+};

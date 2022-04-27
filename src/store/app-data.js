@@ -4,6 +4,7 @@ import { NameSpace } from 'utils/const';
 const initialState = {
   offers: [],
   offer: {},
+  isDataLoaded: false,
 };
 
 export const appData = createSlice({
@@ -16,8 +17,9 @@ export const appData = createSlice({
     },
     loadOffer: (state, action) => {
       state.offer = action.payload;
+      state.isDataLoaded = true;
     },
   },
 });
 
-export const { loadOffers, loadOffer } = appData.actions;
+export const { loadOffers, loadOffer, setDataLoad } = appData.actions;
