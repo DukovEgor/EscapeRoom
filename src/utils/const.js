@@ -36,14 +36,5 @@ export const typeVocabulary = {
   mystic: 'Мистика',
   detective: 'Детектив',
   adventures: 'Приключения',
-  'sci-fi': 'sci-fi',
+  'sci-fi': 'Sci-fi',
 };
-
-export const MENU_TABS = [
-  'Все квесты',
-  'Ужасы',
-  'Мистика',
-  'Детектив',
-  'Приключения',
-  'Sci-fi',
-];

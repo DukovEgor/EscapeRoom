@@ -34,7 +34,7 @@ const DetailedQuest = () => {
     <MainLayout>
       <S.Main>
         <S.PageImage
-          src={coverImg}
+          src={`../${coverImg}`}
           alt={`Квест ${title}`}
           width="1366"
           height="768"
@@ -42,9 +42,10 @@ const DetailedQuest = () => {
         <S.PageContentWrapper>
           <S.PageHeading>
             <S.PageTitle>{title}</S.PageTitle>
-            <S.PageSubtitle>{typeVocabulary[type]}</S.PageSubtitle>
+            <S.PageSubtitle>
+              {typeVocabulary[type]?.toLowerCase()}
+            </S.PageSubtitle>
           </S.PageHeading>
-
           <S.PageDescription>
             <S.Features>
               <S.FeaturesItem>
@@ -53,9 +54,7 @@ const DetailedQuest = () => {
               </S.FeaturesItem>
               <S.FeaturesItem>
                 <IconPerson width="19" height="24" />
-                <S.FeatureTitle>
-                  {peopleCount && peopleCount.join('-')} чел
-                </S.FeatureTitle>
+                <S.FeatureTitle>{peopleCount?.join('-')} чел</S.FeatureTitle>
               </S.FeaturesItem>
               <S.FeaturesItem>
                 <IconPuzzle width="24" height="24" />
