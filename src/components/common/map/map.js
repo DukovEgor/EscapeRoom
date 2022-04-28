@@ -9,7 +9,7 @@ function Map() {
   const map = useMap({ mapRef, city });
 
   const defaultCustomIcon = leaflet.icon({
-    iconUrl: 'https://www.svgrepo.com/show/127575/location-sign.svg',
+    iconUrl: '../../../img/icon-location.svg',
     iconSize: ICONS_SIZES,
     iconAnchor: ANCHOR_SIZES,
   });
