@@ -1,4 +1,5 @@
-Имя студента: [Егор Дюков](https://up.htmlacademy.ru/react/9/user/1882591).
+Лендинг сайта с квест-комнатами.
+React, ReactRouter, Redux Toolkit, Axios.
 
 Время затраченное на разработку проекта: 8ч.
 
